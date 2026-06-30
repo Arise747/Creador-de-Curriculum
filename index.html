@@ -65,6 +65,9 @@
   .secitem{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:12px}
   .sec-bar{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
   .sec-bar .sectitle{font-weight:700;font-size:13px;flex:1 1 140px;min-width:0}
+  .sec-grip{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:7px;background:var(--accent-soft,#eef1f6);color:var(--brand,#3b4250);font-size:13px}
+  .sec-meta{display:flex;gap:7px;flex-wrap:wrap}
+  .sec-meta select{flex:1 1 auto}
   .in.mini{width:auto;font-size:11.5px;padding:7px 8px}
   .iconbtn{border:1px solid var(--line);background:#fff;border-radius:8px;width:30px;height:32px;cursor:pointer;color:var(--muted);font-size:13px;flex:none;line-height:1}
   .iconbtn:hover{background:var(--field);color:var(--ink)}
@@ -178,6 +181,57 @@
   .gauge.warn{color:#9a6a12;border-color:#f0dcae;background:#fdf7e8}
   .gauge.warn .dotpg{background:#e0a020}
 
+  /* ====== opciones de diseño ====== */
+  .page{--fs:1}
+  .summary{font-size:calc(12.6px*var(--fs))}
+  .aside .summary{font-size:calc(12px*var(--fs))}
+  .catlist p{font-size:calc(12.2px*var(--fs))}
+  .aside .catlist p{font-size:calc(11.5px*var(--fs))}
+  .listblock p{font-size:calc(12.2px*var(--fs))}
+  .aside .listblock p{font-size:calc(11.5px*var(--fs))}
+  .entry-role{font-size:calc(13.5px*var(--fs))}
+  .entry-org{font-size:calc(12px*var(--fs))}
+  .entry li{font-size:calc(12.2px*var(--fs))}
+  .entry-subtext{font-size:calc(12.2px*var(--fs))}
+  .skill{font-size:calc(11px*var(--fs))}
+  .lang-name{font-size:calc(12px*var(--fs))}
+  .sec-title{font-size:calc(11.5px*var(--fs))}
+  .page.ats .summary{font-size:calc(12.5px*var(--fs))}
+  .page.ats .ats-line{font-size:calc(12.5px*var(--fs))}
+  .page.ats .catlist p{font-size:calc(12.5px*var(--fs))}
+  .page.ats .listblock p{font-size:calc(12.5px*var(--fs))}
+  .page.ats .ats-entry li{font-size:calc(12.3px*var(--fs))}
+  .page.ats .entry-subtext{font-size:calc(12.3px*var(--fs))}
+  .page.ats .ats-entry-role{font-size:calc(13.5px*var(--fs))}
+  .page.ats .ats-entry-org{font-size:calc(12.5px*var(--fs))}
+  .page.hal-center .cv-head{text-align:center}
+  .page.hal-center .cv-head-top{justify-content:center}
+  .page.hal-center .cv-contact{justify-content:center}
+  .page.hal-center .ats-contact{text-align:center}
+  .page.ph-round .cv-photo{border-radius:16px}
+  .page.ph-square .cv-photo{border-radius:4px}
+  .page.ts-line .sec-title::before{display:none}
+  .page.ts-line .sec-title{border-bottom:2px solid var(--accent);padding-bottom:6px}
+  .page.ts-line .aside .sec-title::after,.page.ts-line .main .sec-title::after{display:none}
+  .page.ts-bar .sec-title::before{width:4px;height:15px;background:var(--accent);transform:none;border-radius:2px}
+  .page.ts-bar .aside .sec-title::after,.page.ts-bar .main .sec-title::after{display:none}
+  .page.ts-plain .sec-title::before{display:none}
+  .page.ts-plain .aside .sec-title::after,.page.ts-plain .main .sec-title::after{display:none}
+  .page.sb-right .cv-body{grid-template-columns:1fr 255px}
+  .page.sb-right .cv-aside{order:2}
+  .page.sb-right .cv-main{order:1}
+  .page.no-tint .cv-aside{background:transparent}
+  .page.no-tint .main .skill{background:#fff;border-color:#dde2e8}
+  .page.dividers .main .sec{border-top:1px solid #e6e9ee;padding-top:13px}
+  .page.dividers .main .sec:first-child{border-top:none;padding-top:0}
+  .page.dividers.ats .ats-sec{border-top:1px solid #e6e9ee;padding-top:11px}
+  .designbar{max-width:1860px;margin:0 auto;padding:0 30px}
+  .designbar>summary{cursor:pointer;font-size:13px;font-weight:600;color:#3b4250;padding:9px 0;list-style:none;user-select:none}
+  .designbar>summary::-webkit-details-marker{display:none}
+  .designbar>summary::before{content:"⚙ ";opacity:.7}
+  .designgrid{display:flex;flex-wrap:wrap;gap:12px 18px;padding:4px 0 14px}
+  .designgrid label{display:flex;flex-direction:column;gap:4px;font-size:10.5px;font-weight:700;color:#7a828d;text-transform:uppercase;letter-spacing:.05em}
+  .designgrid select{font-size:13px;padding:6px 9px;border:1px solid #dde2e8;border-radius:8px;background:#fff;color:#222;text-transform:none;font-weight:500;min-width:120px}
   @media (max-width:1080px){.workspace{grid-template-columns:1fr}.preview-wrap{position:static}.preview-scroll{max-height:none}}
   @media print{
     @page{size:A4;margin:0}
@@ -211,10 +265,23 @@
   <button class="btn btn-primary" id="pdfBtn">↧ Descargar PDF</button>
 </div>
 
+<details class="designbar" id="designPanel">
+  <summary>Diseño avanzado</summary>
+  <div class="designgrid">
+    <label>Cabecera<select id="dHeader"><option value="left">Izquierda</option><option value="center">Centrada</option></select></label>
+    <label>Foto<select id="dPhoto"><option value="circle">Círculo</option><option value="round">Redondeada</option><option value="square">Cuadrada</option></select></label>
+    <label>Títulos<select id="dTitle"><option value="diamond">Rombo + línea</option><option value="line">Subrayado</option><option value="bar">Barra lateral</option><option value="plain">Simple</option></select></label>
+    <label>Columna lateral<select id="dSide"><option value="left">Izquierda</option><option value="right">Derecha</option></select></label>
+    <label>Fondo lateral<select id="dTint"><option value="on">Con color</option><option value="off">Sin color</option></select></label>
+    <label>Divisores<select id="dDiv"><option value="off">No</option><option value="on">Sí</option></select></label>
+    <label>Tamaño de letra<select id="dFont"><option value="0.94">Compacto</option><option value="1">Normal</option><option value="1.08">Grande</option></select></label>
+  </div>
+</details>
+
 <div class="workspace">
   <div class="editor" id="editor">
     <div class="hint">
-      <b>Cada apartado tiene su propia caja de pegado.</b> Abre “＋ Pegar texto en este apartado”, pega SOLO el texto de esa sección y pulsa rellenar: como tú decides a qué apartado pertenece, el reparto es mucho más fiable. Puedes <b>renombrar</b> cada apartado, cambiar su tipo, moverlo, añadir nuevos (“Actividad Investigadora”, “Publicaciones”…) o eliminarlos. Para <b>resaltar</b> algo en cualquier texto, enciérralo entre dobles asteriscos: <b>**así**</b> se ve en negrita. <span id="privacyNote">Nada se guarda: tus datos viven solo en esta pestaña.</span>
+      <b>Rellena cada apartado en sus campos.</b> Pulsa <b>＋ Añadir entrada</b> dentro de un apartado para sumar puestos, estudios o publicaciones, y usa las flechas ↑↓ para ordenarlos. Abajo del todo puedes <b>añadir apartados nuevos</b> ("Publicaciones", "Congresos"…), renombrarlos o cambiar su tipo. Para <b>resaltar</b> texto, enciérralo entre dobles asteriscos: <b>**así**</b> sale en negrita. Ajusta el aspecto en <b>Color</b>, <b>Tipografía</b> y <b>Diseño</b> arriba. <span id="privacyNote">Nada se guarda: tus datos viven solo en esta pestaña.</span>
     </div>
 
     <div class="card">
@@ -315,6 +382,7 @@
     email:'marta.soler@correo.com', phone:'+34 645 210 987', location:'Donostia, España',
     linkedin:'linkedin.com/in/martasoler', web:'', orcid:'0000-0002-1825-0097',
     themeIndex:0, display:"'Fraunces',serif", layout:'design', density:1, autofit:true,
+    headerAlign:'left', photoShape:'circle', titleStyle:'diamond', sidebar:'left', tint:true, dividers:false, fontScale:1,
     sections:[
       mk('Perfil profesional','text','side',{text:'Bióloga especializada en ecología y conservación, con experiencia en investigación de campo, análisis de datos y gestión de proyectos medioambientales. Orientada a resultados y al trabajo multidisciplinar.'}),
       mk('Formación Académica','entries','main',{entries:[
@@ -473,9 +541,19 @@
     var es=(s.entries||[]).map(atsEntry).join('');return es.trim()?atsSec(s.title,es):'';
   }
 
+  function applyDesign(page){
+    page.style.setProperty('--fs', state.fontScale||1);
+    page.classList.toggle('hal-center', state.headerAlign==='center');
+    page.classList.remove('ph-circle','ph-round','ph-square'); page.classList.add('ph-'+(state.photoShape||'circle'));
+    page.classList.remove('ts-diamond','ts-line','ts-bar','ts-plain'); page.classList.add('ts-'+(state.titleStyle||'diamond'));
+    page.classList.toggle('sb-right', state.sidebar==='right');
+    page.classList.toggle('no-tint', state.tint===false);
+    page.classList.toggle('dividers', state.dividers===true);
+  }
   function renderPreview(){
     var t=THEMES[state.themeIndex], page=$("#page");
     page.style.setProperty("--accent",t.accent); page.style.setProperty("--accent-soft",t.soft);
+    applyDesign(page);
     var contact;
     if(state.layout==='ats'){
       page.classList.add('ats'); page.style.setProperty("--display","Arial,Helvetica,sans-serif");
@@ -612,18 +690,17 @@
   function renderSections(){
     $("#sections").innerHTML=state.sections.map(function(s,idx){
       return '<div class="secitem" data-sec="'+s.id+'">'+
-        '<div class="sec-bar"><input class="in sectitle" data-sectitle="'+s.id+'" value="'+esc(s.title)+'">'+
-          typeSel(s.id,s.type)+colSel(s.id,s.col)+
+        '<div class="sec-bar"><span class="sec-grip" title="Orden">'+secIcon(s.type)+'</span><input class="in sectitle" data-sectitle="'+s.id+'" value="'+esc(s.title)+'">'+
           '<button class="iconbtn" data-moveup="'+s.id+'" type="button" title="Subir"'+(idx===0?' disabled':'')+'>↑</button>'+
           '<button class="iconbtn" data-movedown="'+s.id+'" type="button" title="Bajar"'+(idx===state.sections.length-1?' disabled':'')+'>↓</button>'+
           '<button class="iconbtn" data-delsec="'+s.id+'" type="button" title="Eliminar apartado" style="color:#b4351f">✕</button></div>'+
-        '<details class="paste-d"><summary>＋ Pegar texto en este apartado</summary><div class="pbody">'+
-          '<textarea class="in" id="paste_'+s.id+'" style="min-height:88px" placeholder="'+esc(placeholderFor(s.type))+'"></textarea>'+
-          '<div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-primary" data-fill="'+s.id+'" type="button" style="font-size:12px;padding:8px 12px">Rellenar este apartado</button>'+
-          '<button class="btn btn-ghost" data-clearpaste="'+s.id+'" type="button" style="font-size:12px;padding:8px 12px">Borrar texto</button></div>'+
-          '<p class="micro" id="fillst_'+s.id+'"></p></div></details>'+
+        '<div class="sec-meta">'+typeSel(s.id,s.type)+colSel(s.id,s.col)+'</div>'+
         '<div class="sec-fields">'+secFields(s)+'</div></div>';
     }).join('');
+  }
+  function secIcon(t){
+    var m={entries:'▤',list:'☰',cats:'▦',tags:'◇',langs:'A',text:'¶'};
+    return m[t]||'▤';
   }
 
   /* ===================== EDITOR EVENTS ===================== */
@@ -668,8 +745,6 @@
     if((id=b.getAttribute('data-delentry'))){var s2=getSec(id);if(s2){s2.entries.splice(+b.getAttribute('data-i'),1);renderSections();renderPreview();}return;}
     if((id=b.getAttribute('data-addsub'))){var sa=getSec(id);if(sa){var en=sa.entries[+b.getAttribute('data-i')];if(en){en.items=en.items||[];en.items.push({text:'',date:''});renderSections();renderPreview();}}return;}
     if((id=b.getAttribute('data-delsub'))){var sd=getSec(id);if(sd){var en2=sd.entries[+b.getAttribute('data-i')];if(en2&&en2.items){en2.items.splice(+b.getAttribute('data-j'),1);renderSections();renderPreview();}}return;}
-    if((id=b.getAttribute('data-clearpaste'))){var pa=$("#paste_"+id);if(pa)pa.value='';var fs=$("#fillst_"+id);if(fs)fs.textContent='';return;}
-    if((id=b.getAttribute('data-fill'))){fillSection(id);return;}
     if((id=b.getAttribute('data-moveup'))){moveSec(id,-1);return;}
     if((id=b.getAttribute('data-movedown'))){moveSec(id,1);return;}
     if((id=b.getAttribute('data-delsec'))){var s3=getSec(id);if(s3 && confirm('¿Eliminar el apartado "'+s3.title+'"?')){state.sections=state.sections.filter(function(x){return x.id!==id});renderSections();renderPreview();}return;}
@@ -678,26 +753,6 @@
   function moveSec(id,dir){var i=state.sections.findIndex(function(s){return s.id===id});var j=i+dir;
     if(i<0||j<0||j>=state.sections.length)return;
     var tmp=state.sections[i];state.sections[i]=state.sections[j];state.sections[j]=tmp;renderSections();renderPreview();}
-
-  function fillSection(id){
-    var s=getSec(id),pa=$("#paste_"+id),fs=$("#fillst_"+id);if(!s||!pa)return;
-    var txt=pa.value.trim();
-    if(!txt){fs.style.color='#b4351f';fs.textContent='Pega primero el texto de este apartado.';return;}
-    var lines=txt.replace(/\r/g,'').split('\n');
-    var n=0;
-    if(s.type==='entries'){var es=parseEntries(lines);s.entries=es;n=es.length;}
-    else if(s.type==='langs'){var ls=parseLangs(lines);s.entries=ls;n=ls.length;}
-    else if(s.type==='tags'){var all=[];lines.forEach(function(l){stripBullet(l.trim()).split(/[,•|·;]/).forEach(function(x){x=x.trim();if(x)all.push(x);});});s.tags=all.join(', ');n=all.length;}
-    else if(s.type==='cats'){var cl=lines.map(function(l){return stripBullet(l.trim())}).filter(Boolean);s.text=cl.join('\n');n=cl.length;}
-    else if(s.type==='list'){var ll=lines.map(function(l){return stripBullet(l.trim())}).filter(Boolean);s.text=ll.join('\n');n=ll.length;}
-    else {s.text=lines.map(function(l){return l.trim()}).filter(Boolean).join('\n');n=s.text?1:0;}
-    pa.value='';                                  // borra el texto pegado
-    renderSections();renderPreview();
-    var fs2=$("#fillst_"+id);                      // re-query (DOM rebuilt)
-    if(fs2){fs2.style.color=n?'#1d7a4d':'#9a6a12';
-      fs2.textContent=n?('Rellenado ('+n+(s.type==='tags'?' elementos':(s.type==='langs'?' idiomas':(s.type==='cats'?' categorías':(s.type==='list'?' entradas':(s.type==='text'?' bloque':' entradas')))))+'). Texto borrado. Revisa abajo.'):'No reconocí contenido. Revisa el formato o rellena a mano.';}
-    var d=$("#paste_"+id);if(d){var det=d.closest('details');if(det)det.open=true;}
-  }
 
   /* ===================== ADD SECTION ===================== */
   $("#addType").innerHTML=PRESETS.map(function(p,i){return '<option value="'+i+'">'+esc(p.title)+'</option>'}).join('');
@@ -797,6 +852,28 @@
   }
   function clearState(){ if(!STORE)return; try{ localStorage.removeItem(SKEY); }catch(e){} }
 
+  /* ===================== DISEÑO AVANZADO ===================== */
+  function syncDesignControls(){
+    var set=function(id,v){var el=$("#"+id);if(el)el.value=v;};
+    set('dHeader',state.headerAlign||'left');
+    set('dPhoto',state.photoShape||'circle');
+    set('dTitle',state.titleStyle||'diamond');
+    set('dSide',state.sidebar||'left');
+    set('dTint',(state.tint===false)?'off':'on');
+    set('dDiv',(state.dividers===true)?'on':'off');
+    set('dFont',String(state.fontScale||1));
+  }
+  (function wireDesign(){
+    var on=function(id,fn){var el=$("#"+id);if(el)el.addEventListener('change',function(){fn(el.value);renderPreview();});};
+    on('dHeader',function(v){state.headerAlign=v;});
+    on('dPhoto',function(v){state.photoShape=v;});
+    on('dTitle',function(v){state.titleStyle=v;});
+    on('dSide',function(v){state.sidebar=v;});
+    on('dTint',function(v){state.tint=(v==='on');});
+    on('dDiv',function(v){state.dividers=(v==='on');});
+    on('dFont',function(v){state.fontScale=parseFloat(v)||1;});
+  })();
+
   /* ===================== INIT ===================== */
   loadState();
   (function(){var p=$("#privacyNote"); if(!p)return;
@@ -806,6 +883,7 @@
   })();
   if(state.photo){var pp=$("#photoPrev"); if(pp){pp.style.backgroundImage='url('+state.photo+')';pp.style.backgroundSize='cover';pp.style.backgroundPosition='center';pp.innerHTML='';}}
   if(typeof state.autofit!=='undefined'){var ab=$("#autofitBtn"); if(ab) ab.textContent='⤢ Cuadrar: '+(state.autofit?'Sí':'No');}
+  syncDesignControls();
   bindPersonalValues();
   renderSections();
   renderPreview();
