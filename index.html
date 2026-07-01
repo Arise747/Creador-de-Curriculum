@@ -795,10 +795,16 @@
     var LT=String.fromCharCode(60);
     var styles=Array.prototype.map.call(document.querySelectorAll('style'),function(s){return s.innerHTML}).join('\n');
     var pg=$("#page");var _z=pg.style.zoom;pg.style.zoom='';
-    var pageHTML=pg.outerHTML;
+    var cls=pg.className, stl=(pg.getAttribute('style')||''), inner=pg.innerHTML;
     pg.style.zoom=_z;
+    var pageHTML=LT+'div class="'+cls+'" style="'+stl+'"'+'>'+
+      LT+'table class="pw"'+'>'+
+      LT+'thead'+'>'+LT+'tr'+'>'+LT+'td'+'>'+LT+'div class="pmar"'+'>'+LT+'/div'+'>'+LT+'/td'+'>'+LT+'/tr'+'>'+LT+'/thead'+'>'+
+      LT+'tbody'+'>'+LT+'tr'+'>'+LT+'td'+'>'+inner+LT+'/td'+'>'+LT+'/tr'+'>'+LT+'/tbody'+'>'+
+      LT+'tfoot'+'>'+LT+'tr'+'>'+LT+'td'+'>'+LT+'div class="pmar"'+'>'+LT+'/div'+'>'+LT+'/td'+'>'+LT+'/tr'+'>'+LT+'/tfoot'+'>'+
+      LT+'/table'+'>'+LT+'/div'+'>';
     var fonts='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap';
-    var extraCSS='html,body{margin:0;background:#e9ebf0}.stage-print{display:flex;justify-content:center;padding:24px}.page{box-shadow:0 18px 50px -20px rgba(20,24,33,.35);transform:none !important}@media print{@page{size:A4;margin:0}html,body{background:#fff}.stage-print{padding:0}.page{box-shadow:none !important;width:210mm;min-height:calc(297mm - 24mm);padding:12mm 0}.cv-head{padding-top:2px}.page.ats .cv-head{padding-top:2px}}';
+    var extraCSS='html,body{margin:0;background:#e9ebf0}.stage-print{display:flex;justify-content:center;padding:24px}.page{box-shadow:0 18px 50px -20px rgba(20,24,33,.35);transform:none !important;display:block;overflow:visible}.pw{width:100%;border-collapse:collapse}.pw td{padding:0;vertical-align:top}.pmar{height:12mm}@media print{@page{size:A4;margin:0}html,body{background:#fff}.stage-print{padding:0}.page{box-shadow:none !important;width:210mm;min-height:auto;padding:0}.cv-head{padding-top:2px}.page.ats .cv-head{padding-top:2px}}';
     var auto='window.addEventListener("load",function(){setTimeout(function(){try{window.focus();window.print();}catch(e){}},350);});';
     return LT+'!doctype html'+'>'+LT+'html lang="es"'+'>'+LT+'head'+'>'+LT+'meta charset="utf-8"'+'>'+
       LT+'meta name="viewport" content="width=device-width,initial-scale=1"'+'>'+LT+'title'+'>'+'Currículum'+LT+'/title'+'>'+
